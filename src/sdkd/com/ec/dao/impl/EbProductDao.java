@@ -25,6 +25,7 @@ public class EbProductDao extends BaseDao{
                 ebProduct.setEpDescription(rs.getString("ep_description"));
                 ebProduct.setEpPrice(rs.getDouble("ep_price"));
                 ebProduct.setEpDiscount(rs.getInt("ep_discount"));
+                ebProduct.setEpcId(rs.getInt("epc_id"));
                 ebProductList.add(ebProduct);
             }
         } catch (SQLException e) {

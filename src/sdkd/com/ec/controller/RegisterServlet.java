@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * Created by Administrator on 2016/7/6.
@@ -28,6 +29,7 @@ public class RegisterServlet extends HttpServlet {
         if(!ebUserDao.hasRegisterUser(user,password)){
             request.getRequestDispatcher("/reg-result.jsp").forward(request,response);
         }else{
+
             request.getRequestDispatcher("/register.jsp").forward(request,response);
         }
 

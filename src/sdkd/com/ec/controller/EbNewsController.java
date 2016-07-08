@@ -39,6 +39,7 @@ public class EbNewsController extends HttpServlet {
         List<EbPCategory> ebPCategoryList=ebPCategory.getCategories();
         request.setAttribute("categoryList",ebPCategoryList);
 
+
         //跳转
         request.getRequestDispatcher("/index.jsp").forward(request,response);
 

@@ -30,6 +30,42 @@
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register.do</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>EBnewViewServlet</servlet-name>
+        <servlet-class>sdkd.com.ec.controller.EBnewViewServlet</servlet-class>
+
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EBnewViewServlet</servlet-name>
+        <url-pattern>/newView.do</url-pattern>
+    </servlet-mapping>
+    <servlet>
+    <servlet-name>EbNoticeViewServlet</servlet-name>
+    <servlet-class>sdkd.com.ec.controller.EbNoticeViewServlet</servlet-class>
+
+</servlet>
+    <servlet-mapping>
+        <servlet-name>EbNoticeViewServlet</servlet-name>
+        <url-pattern>/noticeView.do</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>LoginOutServlet</servlet-name>
+        <servlet-class>sdkd.com.ec.controller.LoginOutServlet</servlet-class>
+
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginOutServlet</servlet-name>
+        <url-pattern>/loginOut.do</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>EbProductServlet</servlet-name>
+        <servlet-class>sdkd.com.ec.controller.EbProductServlet</servlet-class>
+
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EbProductServlet</servlet-name>
+        <url-pattern>/productList.do</url-pattern>
+    </servlet-mapping>
 
 
 

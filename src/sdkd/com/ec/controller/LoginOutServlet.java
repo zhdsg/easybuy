@@ -1,39 +1,31 @@
 package sdkd.com.ec.controller;
 
-import sdkd.com.ec.dao.impl.EbUserDao;
-import sdkd.com.ec.model.EbUser;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * Created by Administrator on 2016/7/6.
+ * Created by Administrator on 2016/7/7.
  */
-@WebServlet(name = "LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "LoginOutServlet")
+public class LoginOutServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request,response);
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String user =request.getParameter("userName");
-        String password =request.getParameter("passWord");
-
-        EbUserDao ebUserDao =new EbUserDao();
-
-        if(ebUserDao.getUser(user,password)){
-            request.getSession().setAttribute("user",user);
+        HttpSession session = request.getSession(false);//防止创建Session
+        if (session==null){
             request.getRequestDispatcher("/news.do").forward(request,response);
-        }else{
-            request.getRequestDispatcher("/login.jsp").forward(request,response);
-
-
+            return;
         }
+        session.removeAttribute("user");
+        request.getRequestDispatcher("/news.do").forward(request,response);
 
     }
 }

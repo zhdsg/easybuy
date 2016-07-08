@@ -10,15 +10,19 @@
 <body>
 <div id="header" class="wrap">
 	<div id="logo"><img src="images/logo.gif" /></div>
-	<div class="help"><a href="#" class="shopping">购物车</a>
+	<div class="help">
 		<c:if test="${user==null}">
 		<a href="login.jsp">登录</a>
-			<a href="register.jsp">注册</a>
+		<a href="register.jsp">注册</a>
 		</c:if>
+		<c:if test="${user!=null}">
+		欢迎您，${user}
+	</c:if>
+		<a href="#" class="shopping">购物车</a>
 		<a href="guestbook.jsp">留言</a>
-
-		<a href="/news.do">退出</a>
-
+		<c:if test="${user!=null}">
+		<a href="/loginOut.do">退出</a>
+		</c:if>
 	</div>
 	<div class="navbar">
 		<ul class="clearfix">
@@ -61,9 +65,12 @@
 					<c:if test="${ca.epcParentId==0}">
 				<dt>${ca.epcName}</dt>
 					</c:if>
-					<c:if test="${ca.epcParentId!=0}">
-				<dd><a href="product-list.jsp">${ca.epcName}</a></dd>
+					<c:forEach var="pca" items="${categoryList}">
+					<c:if test="${pca.epcParentId==ca.epcId}">
+				<dd><a href="/productList.do?epc_id=${pca.epcId}">${pca.epcName}</a></dd>
 					</c:if>
+					</c:forEach>
+
 				</c:forEach>
 
 			</dl>
@@ -102,7 +109,7 @@
 				<h4>最新公告</h4>
 				<ul>
 					<c:forEach var ="notice" items="${noticeList}">
-						<li><a href="news-view.jsp" target="_blank">${notice.noTitle}</a></li>
+						<li><a href="/noticeView.do?notice_id=${notice.noId}" target="_blank">${notice.noTitle}</a></li>
 
 					</c:forEach>
 
@@ -113,7 +120,7 @@
 				<h4>新闻动态</h4>
 				<ul>
 					<c:forEach var ="news" items ="${newList}">
-					<li><a href="news-view.jsp" target="_blank">${news.enTitle}</a></li>
+					<li><a href="/newView.do?new_id=${news.enId}" target="_blank">${news.enTitle}</a></li>
 						</c:forEach>
 
 				</ul>

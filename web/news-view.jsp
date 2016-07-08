@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -50,33 +51,36 @@
 		<div class="news-list">
 			<h4>最新公告</h4>
 			<ul>
-				<li><a href="news-view.jsp" target="_blank">抢钱啦</a></li>
-				<li><a href="news-view.jsp" target="_blank">抢钱啦</a></li>
-				<li><a href="news-view.jsp" target="_blank">抢钱啦</a></li>
-				<li><a href="news-view.jsp" target="_blank">抢钱啦</a></li>
-				<li><a href="news-view.jsp" target="_blank">抢钱啦</a></li>
-				<li><a href="news-view.jsp" target="_blank">抢钱啦</a></li>
-				<li><a href="news-view.jsp" target="_blank">抢钱啦</a></li>
+				<c:forEach var ="notice" items="${noticeList}">
+					<li><a href="/noticeView.do?notice_id=${notice.noId}" target="_blank">${notice.noTitle}</a></li>
+
+				</c:forEach>
 			</ul>
 		</div>
 		<div class="spacer"></div>
 		<div class="news-list">
 			<h4>新闻动态</h4>
 			<ul>
-				<li><a href="news-view.jsp" target="_blank">抢钱啦</a></li>
-				<li><a href="news-view.jsp" target="_blank">抢钱啦</a></li>
-				<li><a href="news-view.jsp" target="_blank">抢钱啦</a></li>
-				<li><a href="news-view.jsp" target="_blank">抢钱啦</a></li>
-				<li><a href="news-view.jsp" target="_blank">抢钱啦</a></li>
-				<li><a href="news-view.jsp" target="_blank">抢钱啦</a></li>
-				<li><a href="news-view.jsp" target="_blank">抢钱啦</a></li>
+				<c:forEach var ="news" items ="${newList}">
+					<li><a href="/newView.do?new_id=${news.enId}" target="_blank">${news.enTitle}</a></li>
+				</c:forEach>
 			</ul>
 		</div>
 	</div>
 	<div id="news" class="right-main">
-		<h1>铁三角 Audio-Technica ATH-EQ300M-SV 银色 挂耳式耳机</h1>
+		<c:if test="${newTitle!=null}">
+		<h1>${newTitle}</h1>
+		</c:if>
+		<c:if test="${noTitle!=null}">
+			<h1>${noTitle}</h1>
+		</c:if>
 		<div class="content">
-			f
+			<c:if test="${newTitle!=null}">
+			${newContent}
+			</c:if>
+			<c:if test="${noTitle!=null}">
+			${noContent}
+			</c:if>
 		</div>
 	</div>
 	<div class="clear"></div>
