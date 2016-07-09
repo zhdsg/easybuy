@@ -3,6 +3,9 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+    <welcome-file-list>
+        <welcome-file>news.do</welcome-file>
+    </welcome-file-list>
     <servlet>
     <servlet-name>EbNewsController</servlet-name>
     <servlet-class>sdkd.com.ec.controller.EbNewsController</servlet-class>
@@ -65,6 +68,24 @@
     <servlet-mapping>
         <servlet-name>EbProductServlet</servlet-name>
         <url-pattern>/productList.do</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>EbProConServlet</servlet-name>
+        <servlet-class>sdkd.com.ec.controller.EbProConServlet</servlet-class>
+
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EbProConServlet</servlet-name>
+        <url-pattern>/productView.do</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>EbShopServlet</servlet-name>
+        <servlet-class>sdkd.com.ec.controller.EbShopServlet</servlet-class>
+
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EbShopServlet</servlet-name>
+        <url-pattern>/shop.do</url-pattern>
     </servlet-mapping>
 
 

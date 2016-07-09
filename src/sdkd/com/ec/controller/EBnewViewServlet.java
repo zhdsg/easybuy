@@ -28,13 +28,8 @@ public class EBnewViewServlet extends HttpServlet {
         EbNewsDao newsDao = new EbNewsDao();
         List<EbNews> ebNewses = newsDao.getNews();
         request.setAttribute("newList",ebNewses);
-        for(int i=0;i<ebNewses.size();i++){
-            if(id==ebNewses.get(i).getEnId())
-            {
-                request.setAttribute("newTitle",ebNewses.get(i).getEnTitle());
-                request.setAttribute("newContent",ebNewses.get(i).getEnContent());
-            }
-        }
+      EbNews news=newsDao.getNewbyId(id);
+        request.setAttribute("news",news);
         EbNoticeDao ebNotice =new EbNoticeDao();
         List<EbNotice> ebNoticeList =ebNotice.getNotice();
         request.setAttribute("noticeList",ebNoticeList);

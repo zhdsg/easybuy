@@ -110,8 +110,8 @@
 				<c:forEach var="product" items="${productList}">
 				<li>
 					<dl>
-						<dt><a href="product-view.jsp" target="_blank"><img src="images/product/${product.epId}.jpg" /></a></dt>
-						<dd class="title"><a href="product-view.jsp" target="_blank">${product.epName}</a></dd>
+						<dt><a href="/productView.do?ep_id=${product.epId}" target="_blank"><img src="images/product/${product.epId}.jpg" /></a></dt>
+						<dd class="title"><a href="/productView.do?ep_id=${product.epId}" target="_blank">${product.epName}</a></dd>
 						<dd class="price">￥${product.epPrice}</dd>
 					</dl>
 				</li>

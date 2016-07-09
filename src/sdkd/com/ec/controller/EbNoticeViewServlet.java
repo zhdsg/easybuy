@@ -28,16 +28,12 @@ public class EbNoticeViewServlet extends HttpServlet {
 
 
 
-        EbNoticeDao ebNotice =new EbNoticeDao();
-        List<EbNotice> ebNoticeList =ebNotice.getNotice();
+        EbNoticeDao ebNoticeDao =new EbNoticeDao();
+        List<EbNotice> ebNoticeList =ebNoticeDao.getNotice();
         request.setAttribute("noticeList",ebNoticeList);
-        for(int i=0;i<ebNoticeList.size();i++){
-            if(id==ebNoticeList.get(i).getNoId())
-            {
-                request.setAttribute("noTitle",ebNoticeList.get(i).getNoTitle());
-                request.setAttribute("noContent",ebNoticeList.get(i).getNoContent());
-            }
-        }
+
+        EbNotice ebNotice=ebNoticeDao.getNoticebyId(id);
+        request.setAttribute("notice",ebNotice);
         EbNewsDao newsDao = new EbNewsDao();
         List<EbNews> ebNewses = newsDao.getNews();
         request.setAttribute("newList",ebNewses);

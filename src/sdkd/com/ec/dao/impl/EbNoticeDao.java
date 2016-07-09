@@ -21,6 +21,7 @@ public class EbNoticeDao extends BaseDao {
                 EbNotice ebNotice =new EbNotice();
                 ebNotice.setNoId(rs.getInt("notice_id"));
                 ebNotice.setNoTitle(rs.getString("notice_title"));
+                ebNotice.setNoContent(rs.getString("notice_content"));
                 ebNoticeList.add(ebNotice);
 
             }
@@ -30,6 +31,28 @@ public class EbNoticeDao extends BaseDao {
             this.close();
         }
         return ebNoticeList;
+    }
+    public   EbNotice getNoticebyId(int id){
+        EbNotice ebNotice =new EbNotice();
+        String sql ="select * FROM easybuy_notice where notice_id=?";
+        List<String> params=new ArrayList();
+        params.add(id+"");
+        ResultSet rs =this.executeSearch(sql,params);
+        try {
+            while(rs.next()){
+
+                ebNotice.setNoId(rs.getInt("notice_id"));
+                ebNotice.setNoTitle(rs.getString("notice_title"));
+                ebNotice.setNoContent(rs.getString("notice_content"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            this.close();
+        }
+        return ebNotice;
+
+
     }
 
 

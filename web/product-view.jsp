@@ -1,4 +1,5 @@
 ﻿<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -9,7 +10,20 @@
 <body>
 <div id="header" class="wrap">
 	<div id="logo"><img src="images/logo.gif" /></div>
-	<div class="help"><a href="#" class="shopping">购物车</a><a href="login.jsp">登录</a><a href="register.jsp">注册</a><a href="guestbook.jsp">留言</a></div>
+	<div class="help">
+		<c:if test="${user==null}">
+			<a href="login.jsp">登录</a>
+			<a href="register.jsp">注册</a>
+		</c:if>
+		<c:if test="${user!=null}">
+			欢迎您，${user}
+		</c:if>
+		<a href="#" class="shopping">购物车</a>
+		<a href="guestbook.jsp">留言</a>
+		<c:if test="${user!=null}">
+			<a href="/loginOut.do">退出</a>
+		</c:if>
+	</div>
 	<div class="navbar">
 		<ul class="clearfix">
 			<li class="current"><a href="#">首页</a></li>
@@ -50,46 +64,42 @@
 		<div class="box">
 			<h2>商品分类</h2>
 			<dl>
-				<dt>图书音像</dt>
-				<dd><a href="product-list.jsp">图书</a></dd>
-				<dd><a href="product-list.jsp">音乐</a></dd>
-				<dt>百货</dt>
-				<dd><a href="product-list.jsp">运动健康</a></dd>
-				<dd><a href="product-list.jsp">服装</a></dd>
-				<dd><a href="product-list.jsp">家居</a></dd>
-				<dd><a href="product-list.jsp">美妆</a></dd>
-				<dd><a href="product-list.jsp">母婴</a></dd>
-				<dd><a href="product-list.jsp">食品</a></dd>
-				<dd><a href="product-list.jsp">手机数码</a></dd>
-				<dd><a href="product-list.jsp">家具首饰</a></dd>
-				<dd><a href="product-list.jsp">手表饰品</a></dd>
-				<dd><a href="product-list.jsp">鞋包</a></dd>
-				<dd><a href="product-list.jsp">家电</a></dd>
-				<dd><a href="product-list.jsp">电脑办公</a></dd>
-				<dd><a href="product-list.jsp">玩具文具</a></dd>
-				<dd><a href="product-list.jsp">汽车用品</a></dd>
+				<c:forEach var ="ca" items="${categoryList}">
+					<c:if test="${ca.epcParentId==0}">
+						<dt>${ca.epcName}</dt>
+					</c:if>
+					<c:forEach var="pca" items="${categoryList}">
+						<c:if test="${pca.epcParentId==ca.epcId}">
+							<dd><a href="/productList.do?epc_id=${pca.epcId}">${pca.epcName}</a></dd>
+						</c:if>
+					</c:forEach>
+
+				</c:forEach>
 			</dl>
 		</div>
 	</div>
 	<div id="product" class="main">
-		<h1>铁三角 Audio-Technica ATH-EQ300M-SV 银色 挂耳式耳机</h1>
+
+		<h1>${proCon.epName}</h1>
 		<div class="infos">
-			<div class="thumb"><img src="images/product/0.jpg" /></div>
+			<div class="thumb"><img src="images/product/${proCon.epId}.jpg" /></div>
 			<div class="buy">
-				<p>商城价：<span class="price">￥99.00</span></p>
+				<p>商城价：<span class="price">￥${proCon.epPrice}</span></p>
+				<c:if test="${proCon.epStock!=0}">
 				<p>库　存：有货</p>
-				<p>库　存：有货</p>
-				<p>库　存：有货</p>
-				<p>库　存：有货</p>
-				<div class="button"><input type="button" name="button" value="" onclick="goBuy(1)" /><a href="#">放入购物车</a></div>
+				</c:if>
+				<c:if test="${proCon.epStock==0}">
+				<p>库　存：没有货</p>
+				</c:if>
+				<div class="button"><input type="button" name="button" value="" onclick="goBuy(1)" /><a href="/shop.do?id=2">放入购物车</a></div>
 			</div>
 			<div class="clear"></div>
 		</div>
 		<div class="introduce">
-			<h2><strong>商品详情</strong></h2>
+			<h2><strong>商品描述</strong></h2>
 			<div class="text">
-				sdf<br />
-				sdf<br />
+				${proCon.epDescription}<br />
+					${proCon.epDescription}<br />
 			</div>
 		</div>
 	</div>

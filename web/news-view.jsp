@@ -10,7 +10,20 @@
 <body>
 <div id="header" class="wrap">
 	<div id="logo"><img src="images/logo.gif" /></div>
-	<div class="help"><a href="#" class="shopping">购物车</a><a href="login.jsp">登录</a><a href="register.jsp">注册</a><a href="guestbook.jsp">留言</a></div>
+	<div class="help">
+		<c:if test="${user==null}">
+			<a href="login.jsp">登录</a>
+			<a href="register.jsp">注册</a>
+		</c:if>
+		<c:if test="${user!=null}">
+			欢迎您，${user}
+		</c:if>
+		<a href="#" class="shopping">购物车</a>
+		<a href="guestbook.jsp">留言</a>
+		<c:if test="${user!=null}">
+			<a href="/loginOut.do">退出</a>
+		</c:if>
+	</div>
 	<div class="navbar">
 		<ul class="clearfix">
 			<li class="current"><a href="#">首页</a></li>
@@ -68,18 +81,18 @@
 		</div>
 	</div>
 	<div id="news" class="right-main">
-		<c:if test="${newTitle!=null}">
-		<h1>${newTitle}</h1>
+		<c:if test="${news!=null}">
+		<h1>${news.enTitle}</h1>
 		</c:if>
-		<c:if test="${noTitle!=null}">
-			<h1>${noTitle}</h1>
+		<c:if test="${notice!=null}">
+			<h1>${notice.noTitle}</h1>
 		</c:if>
 		<div class="content">
-			<c:if test="${newTitle!=null}">
-			${newContent}
+			<c:if test="${news!=null}">
+			${news.enContent}
 			</c:if>
-			<c:if test="${noTitle!=null}">
-			${noContent}
+			<c:if test="${notice!=null}">
+			${notice.noContent}
 			</c:if>
 		</div>
 	</div>

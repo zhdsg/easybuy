@@ -21,11 +21,11 @@ public class LoginOutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);//防止创建Session
         if (session==null){
-            request.getRequestDispatcher("/news.do").forward(request,response);
+            request.getRequestDispatcher("/login.jsp").forward(request,response);
             return;
         }
         session.removeAttribute("user");
-        request.getRequestDispatcher("/news.do").forward(request,response);
+        request.getRequestDispatcher("/login.jsp").forward(request,response);
 
     }
 }

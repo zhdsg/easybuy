@@ -3,6 +3,7 @@ package sdkd.com.ec.dao.impl;
 import sdkd.com.ec.dao.BaseDao;
 import sdkd.com.ec.model.EbNews;
 
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -32,5 +33,28 @@ public class EbNewsDao extends BaseDao {
             this.close();
         }
         return newsList;
+    }
+    public EbNews getNewbyId(int id){
+        EbNews news = new EbNews();
+        String sql = "select * from easybuy_news where en_id=?";
+        List<String> params=new ArrayList();
+        params.add(id+"");
+        try {
+            ResultSet rs = this.executeSearch(sql,params);
+            while (rs.next()){
+
+                news.setEnId(rs.getInt("en_id"));
+                news.setEnTitle(rs.getString("en_title"));
+                news.setEnContent(rs.getString("en_content"));
+                news.setEnCreateTime(rs.getTime("en_create_time"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            this.close();
+        }
+        return news;
+
+
     }
 }

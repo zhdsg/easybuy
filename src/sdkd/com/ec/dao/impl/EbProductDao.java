@@ -26,6 +26,7 @@ public class EbProductDao extends BaseDao{
                 ebProduct.setEpPrice(rs.getDouble("ep_price"));
                 ebProduct.setEpDiscount(rs.getInt("ep_discount"));
                 ebProduct.setEpcId(rs.getInt("epc_id"));
+                ebProduct.setEpStock(rs.getInt("ep_stock"));
                 ebProductList.add(ebProduct);
             }
         } catch (SQLException e) {
@@ -36,5 +37,29 @@ public class EbProductDao extends BaseDao{
 
         return ebProductList;
     }
+    public EbProduct getProductbyId(int id){
+        EbProduct ebProduct =new EbProduct();
+        String sql ="select * FROM easybuy_product where ep_id =? ";
+        List<String> params=new ArrayList();
+        params.add(id+"");
+        ResultSet rs =this.executeSearch(sql,params);
+        try {
+            while(rs.next()){
+
+                ebProduct.setEpId(rs.getInt("ep_id"));
+                ebProduct.setEpName(rs.getString("ep_name"));
+                ebProduct.setEpDescription(rs.getString("ep_description"));
+                ebProduct.setEpPrice(rs.getDouble("ep_price"));
+                ebProduct.setEpStock(rs.getInt("ep_stock"));
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            this.close();
+        }
+        return  ebProduct;
+    }
+
 
 }
